@@ -1,7 +1,84 @@
-**05/2022: This repository is not maintained anymore**, please use [@u4/opencv4nodejs](https://github.com/UrielCh/opencv4nodejs) for a more active fork
+# @u4/opencv4nodejs
 
-opencv4nodejs
-=============
+[![NPM Version](https://img.shields.io/npm/v/@u4/opencv4nodejs.svg?style=flat)](https://www.npmjs.org/package/@u4/opencv4nodejs)
+
+## Getting starts
+
+Opencv4nodejs can be link to a prebuild openCV 3 or 4. or can build it's own openCV using [@u4/opencv-build](https://www.npmjs.com/package/@u4/opencv-build),
+In this case you have to choose witch version you want to link.
+
+### To use your own openCV build
+
+**3 way to use your own openCV**
+
+#### Environment variable
+Define environment variable:
+- `OPENCV4NODEJS_DISABLE_AUTOBUILD`=`1`
+
+If you do not install openCV with a common setup like chocolate, apt or brew, you may need to also define:
+ `OPENCV_INCLUDE_DIR`=`include path` , `OPENCV_LIB_DIR`=`lib path`, `OPENCV_BIN_DIR`=`binary path`
+
+#### package.json
+Define an opencv4nodejs section in your package.json like:
+```json
+"opencv4nodejs" {
+  "disableAutoBuild": "1",
+}
+```
+If you do not install openCV with a common setup like chocolote, apt or brew, you may need to also define:
+  `"OPENCV_INCLUDE_DIR"`, `"OPENCV_LIB_DIR"`, `"OPENCV_BIN_DIR"`
+
+#### use build-opencv
+Call `build-opencv` once like:
+```bash
+npm link
+build-opencv --nobuild rebuild
+```
+
+If you do not install openCV with a common setup like chocolote, apt or brew, you may need to also define:
+```bash
+npm link
+build-opencv --incDir /usr/include/opencv4/ --libDir /lib/x86_64-linux-gnu/ --binDir=/usr/bin/ --nobuild rebuild
+```
+
+### To build your own openCV using included builder
+
+If you want to build OpenCV define the environement variable `OPENCV_BUILD_ROOT` to speedup your development, so openCV build will be processed out of your node_modules
+
+ex:
+```bash
+OPENCV_BUILD_ROOT=~/opencv
+```
+
+**3 way to build openCV 4.6.0**
+
+#### Environment variable
+Define environment variable:
+- `OPENCV4NODEJS_AUTOBUILD_OPENCV_VERSION`="4.6.0"
+
+#### package.json
+Define an opencv4nodejs section in your package.json like:
+```json
+"opencv4nodejs" {
+  "autoBuildOpencvVersion": "4.6.0",
+}
+```
+
+#### use build-opencv
+Call `build-opencv` once like:
+```bash
+npm link
+build-opencv --version 4.6.0 rebuild
+```
+
+** make it portable use Docker **
+You can also use my [docker image](https://hub.docker.com/repository/docker/urielch/opencv-nodejs) I use it on my raspberry Pi 4, and build them on an ~~Oracle Ampere~~ (they delete all my stuff and do not reply to my requests) Mac Mini M1
+
+check Docker sample down below
+
+## for advanced option
+
+- [@u4/opencv-build](https://github.com/UrielCh/npm-opencv-build) for info.
 
 ![opencv4nodejs](https://user-images.githubusercontent.com/31125521/37272906-67187fdc-25d8-11e8-9704-40e9e94c1e80.jpg)
 
@@ -197,7 +274,7 @@ It's possible to specify build environment variables by inserting them into the 
     "opencv4nodejs": "^X.X.X"
   },
   "opencv4nodejs": {
-    "disableAutoBuild": "1",
+    "disableAutoBuild": 1,
     "opencvIncludeDir": "C:\\tools\\opencv\\build\\include",
     "opencvLibDir": "C:\\tools\\opencv\\build\\x64\\vc14\\lib",
     "opencvBinDir": "C:\\tools\\opencv\\build\\x64\\vc14\\bin"
