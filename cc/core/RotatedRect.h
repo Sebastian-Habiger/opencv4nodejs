@@ -25,6 +25,18 @@ public:
 	static NAN_METHOD(BoundingRect) {
 		info.GetReturnValue().Set(Rect::Converter::wrap(unwrapSelf(info).boundingRect()));
 	}
+
+	static NAN_METHOD(Points) {
+		cv::RotatedRect rotatedRect = unwrapSelf(info);
+		cv::Point2f pts2d[4];
+		rotatedRect.points(pts2d);
+		std::vector<cv::Point2f> jsPts;
+		for (int i=0; i<4; i++) {
+			jsPts.push_back(pts2d[i]);
+		}
+
+		info.GetReturnValue().Set(Point2::ArrayWithCastConverter<cv::Point2f>::wrap(jsPts));
+	}
 };
 
 #endif

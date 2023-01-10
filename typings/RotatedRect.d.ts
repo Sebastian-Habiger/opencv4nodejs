@@ -9,4 +9,5 @@ export class RotatedRect {
   constructor();
   constructor(center: Point2, size: Size, angle: number);
   boundingRect(): Rect;
+  points(): Point2[];
 }

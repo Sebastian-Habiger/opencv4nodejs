@@ -12,6 +12,7 @@ NAN_MODULE_INIT(RotatedRect::Init) {
 	Nan::SetAccessor(ctor->InstanceTemplate(), FF::newString("size"), RotatedRect::size_getter);
 
 	Nan::SetPrototypeMethod(ctor, "boundingRect", RotatedRect::BoundingRect);
+	Nan::SetPrototypeMethod(ctor, "points", RotatedRect::Points);
 
   Nan::Set(target,Nan::New("RotatedRect").ToLocalChecked(), FF::getFunction(ctor));
 };
