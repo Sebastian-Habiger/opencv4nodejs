@@ -9,6 +9,7 @@ import { KeyPoint } from './KeyPoint.d';
 import { DescriptorMatch } from './DescriptorMatch.d';
 import { Rect } from './Rect.d';
 import { OCRHMMClassifier } from './OCRHMMClassifier.d';
+import {RotatedRect} from './RotatedRect';
 
 export class HistAxes {
   channel: number;
@@ -58,6 +59,7 @@ export function findFundamentalMatAsync(points1: Point2[], points2: Point2[], me
 export function findHomography(srcPoints: Point2[], dstPoints: Point2[], method?: number, ransacReprojThreshold?: number, maxIters?: number, confidence?: number): { homography: Mat, mask: Mat };
 export function fitLine(points: Point2[], distType: number, param: number, reps: number, aeps: number): Vec4;
 export function fitLine(points: Point3[], distType: number, param: number, reps: number, aeps: number): number[];
+export function minAreaRect(points: Point2[]): RotatedRect;
 export function getAffineTransform(srcPoints: Point2[], dstPoints: Point2[]): Mat;
 export function getBuildInformation(): string;
 export function getPerspectiveTransform(srcPoints: Point2[], dstPoints: Point2[]): Mat;

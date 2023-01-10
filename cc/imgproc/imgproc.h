@@ -21,6 +21,7 @@ public:
   static NAN_METHOD(GetPerspectiveTransform);
   static NAN_METHOD(Plot1DHist);
   static NAN_METHOD(FitLine);
+  static NAN_METHOD(MinAreaRect);
   static NAN_METHOD(GetTextSize);
   static NAN_METHOD(GetTextSizeAsync);
   static NAN_METHOD(ApplyColorMap);

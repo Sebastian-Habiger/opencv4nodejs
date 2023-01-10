@@ -12,6 +12,7 @@ NAN_MODULE_INIT(Imgproc::Init) {
   Nan::SetMethod(target, "getRotationMatrix2D", GetRotationMatrix2D);
   Nan::SetMethod(target, "plot1DHist", Plot1DHist);
   Nan::SetMethod(target, "fitLine", FitLine);
+  Nan::SetMethod(target, "minAreaRect", MinAreaRect);
   Nan::SetMethod(target, "getAffineTransform", GetAffineTransform);
   Nan::SetMethod(target, "getPerspectiveTransform", GetPerspectiveTransform);
   Nan::SetMethod(target, "getTextSize", GetTextSize);
@@ -218,6 +219,18 @@ NAN_METHOD(Imgproc::FitLine) {
     }
 	info.GetReturnValue().Set(jsLineParams);
   }
+}
+
+NAN_METHOD(Imgproc::MinAreaRect) {
+  FF::TryCatch tryCatch("Imgproc::MinAreaRect");
+  if (!info[0]->IsArray()) {
+	  return tryCatch.throwError("expected arg 0 to be an array");
+  }
+  std::vector<cv::Point2d> pts2d;
+  if (Point2::ArrayWithCastConverter<cv::Point2d>::arg(0, &pts2d, info)) {
+    return tryCatch.reThrow();
+  }
+  info.GetReturnValue().Set(RotatedRect::Converter::wrap(cv::minAreaRect(pts2d)));
 }
 
 NAN_METHOD(Imgproc::GetTextSize) {
